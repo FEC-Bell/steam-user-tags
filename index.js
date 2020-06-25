@@ -11,5 +11,4 @@ app.get('/api/tags/:productId', ( req, res) => {
     res.send( sampleTags );
 });
 
-
 var sampleTags = ['Strategy', 'Turn-Based Strategy', 'Historical', 'Multiplayer', 'Singleplayer', 'Turn-Based', 'Grand Strategy', '4X', 'War', 'Simulation', 'Tactical', 'City Builder', 'Great Soundtrack', 'Moddable', 'Online Co-Op', 'Co-op', 'Building', 'Management', 'Hex Grid', 'Atmospheric'];
