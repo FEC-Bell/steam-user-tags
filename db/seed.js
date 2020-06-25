@@ -14,12 +14,13 @@ var seed_values = () => {
     var game_tags = [];
     var game_tag_count = rnd(40) + 10;
     for ( var tags = 0; tags < game_tag_count ; tags++ ) {
-      var tag_index = rnd( tag_list.length ); 
+      var tag_index = rnd( tag_list.length - 1 ); 
       // skip any random tags that are already attached to this game
       if ( !game_tags.includes( tag_list[tag_index] ) ) {
         // INSERT into reviews_graph (gameid, name, count) VALUES ...
-        values += `(${game_id},'${tag_list[tag_index]}',${ rnd( tag_list.length  ) +  tag_index }),`
-        // count calculation is random, but also weighted by tag popularity (tag_index) 
+        values += `(${game_id},'${tag_list[tag_index]}',${ rnd( game_tag_count  ) +  ( ( tag_list.length  - tag_index ) / 4 ) }),`
+        // count calculation is random, but also weighted by tag popularity ( tag_list.length  - tag_index ) 
+        // count is divided by 4 for smaller, more plausible numbers -- decimals are implicitly converted to ints
         game_tags.push(tag_list[tag_index]);
       }
     }
@@ -60,5 +61,5 @@ SELECT
 name
 FROM user_tags
 WHERE gameid = 1
-ORDER BY count
+ORDER BY count DESC
 */
