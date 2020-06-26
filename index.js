@@ -8,18 +8,15 @@ app.use(express.static('./client/dist'));
 
 app.get('/api/tags/:gameId', ( req, res) => {
 
-    db.query( 'use steam;', (err, result, fields) => {
+    // get all user tags for this game sorted by popularity ( most tagged first )
+    var sqlText = `SELECT name FROM user_tags WHERE gameid = ${ req.params.gameId } ORDER BY count DESC`;
+
+    db.query( sqlText, (err, result, fields) => {
         if (err) throw err;
-        var sqlText = `SELECT name FROM user_tags WHERE gameid = ${ req.params.gameId } ORDER BY count DESC`;
-        db.query( sqlText, (err, result, fields) => {
-            if (err) throw err;
-            res.send( result.map( rdp => rdp['name'] )  );
-        })
+        
+        // SQL result returns an array of these that need to be parsed for return: 
+        // RowDataPacket { name: 'Adventure' },
+        res.send( result.map( rdp => rdp['name'] )  );
     })
-    
+
 });
-
-
-
-
-var sampleTags = ['Strategy', 'Turn-Based Strategy', 'Historical', 'Multiplayer', 'Singleplayer', 'Turn-Based', 'Grand Strategy', '4X', 'War', 'Simulation', 'Tactical', 'City Builder', 'Great Soundtrack', 'Moddable', 'Online Co-Op', 'Co-op', 'Building', 'Management', 'Hex Grid', 'Atmospheric'];

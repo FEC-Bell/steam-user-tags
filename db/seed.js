@@ -1,4 +1,6 @@
-const db = require('./connection.js')
+var mysql = require('mysql');
+var config = require('./config');
+var db = mysql.createConnection( config );
 
 // a flexible randomizer that takes arrays or numbers and returns a random element from that range
 var rnd = n => Array.isArray(n) ? n[ rnd(n.length) - 1] : Math.floor( Math.random() * n ) + 1
@@ -46,9 +48,9 @@ var seedValues = () => {
 
 // run each of these lines in order
 var sql = [
-  `DROP DATABASE IF EXISTS steam;`,
-  `CREATE DATABASE steam;`,
+  `CREATE DATABASE IF NOT EXISTS steam;`,
   `USE steam;`,
+  `DROP TABLE IF EXISTS user_tags;`,
   `CREATE TABLE user_tags (
     id int auto_increment primary key,
     gameid int not null,
