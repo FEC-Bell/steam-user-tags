@@ -13,10 +13,7 @@ app.get('/api/tags/:gameId', ( req, res) => {
 
     db.query( sqlText, (err, result, fields) => {
         if (err) throw err;
-        
-        // SQL result returns an array of these that need to be parsed for return: 
-        // RowDataPacket { name: 'Adventure' },
-        res.send( result.map( rdp => rdp['name'] )  );
+        res.send( result.map( row => row['name'] )  );
     })
 
 });
