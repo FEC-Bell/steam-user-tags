@@ -14,6 +14,7 @@ app.get('/api/tags/:gameId', ( req, res) => {
     db.query( sqlText, (err, result, fields) => {
         if (err) throw err;
         res.send( result.map( row => row['name'] )  );
+        // ex. { ['Strategy', 'Turn-Based Strategy', 'Historical', 'Multiplayer', ... ] }
     })
 
 });
