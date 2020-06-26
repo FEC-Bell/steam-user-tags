@@ -1,4 +1,4 @@
-const connection = require('./connection.js')
+const db = require('./connection.js')
 
 // a flexible randomizer that takes arrays or numbers and returns a random element from that range
 var rnd = n => Array.isArray(n) ? n[ rnd(n.length) - 1] : Math.floor( Math.random() * n ) + 1
@@ -64,7 +64,7 @@ console.log( 'Beginning seed script for user_tags')
 Promise.all( 
   sql.map( (sqlText) => {
       new Promise( (resolve, reject) => { 
-        connection.query( sqlText, (err, result, fields) => {
+        db.query( sqlText, (err, result, fields) => {
           // console.log('\nExecuting sql: ' + sqlText + '\n');
           if (err) throw err;
         })
@@ -73,7 +73,7 @@ Promise.all(
 )
 .then(values => { console.log('Data generated successfully.') })
 .catch(error => { console.error(error.message) })
-connection.end( () => { console.log('Connection closed.') });
+db.end( () => { console.log('Connection closed.') });
 
 /*
 
