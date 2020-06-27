@@ -1,14 +1,21 @@
-const express = require('express')
-const app = express()
-const port = 3002
+/* eslint-disable no-console */
+const express = require('express');
+const db = require('./db/connection.js');
 
-app.listen(port, () => console.log(`Steam user tags service. listening at http://localhost:${port}`))
+const app = express();
+const port = 3002;
+
+app.listen(port, () => console.log(`Steam user tags service. listening at http://localhost:${port}`));
 app.use(express.static('./client/dist'));
 
-// SAMPLE API CALLS
+app.get('/api/tags/:gameId', (req, res) => {
+// get all user tags for this game sorted by popularity ( most tagged first )
+  const sqlText = `SELECT name FROM user_tags WHERE gameid = ${req.params.gameId} ORDER BY count DESC`;
 
-app.get('/api/tags/:productId', ( req, res) => {
-    res.send( sampleTags );
+  db.query(sqlText, (err, result) => {
+    if (err) { res.status(500).send({ error: 'Internal server error' }); throw err; }
+    console.log(`{"tags": [${result.map((row) => `"${row.name}"`)}]}`);
+    res.json(JSON.parse(`{"tags": [${result.map((row) => `"${row.name}"`)}]}`));
+    // ex. {"tags":["Difficult","Atmospheric","Anime","Music","Design & Illustration","Classic"]}
+  });
 });
-
-var sampleTags = ['Strategy', 'Turn-Based Strategy', 'Historical', 'Multiplayer', 'Singleplayer', 'Turn-Based', 'Grand Strategy', '4X', 'War', 'Simulation', 'Tactical', 'City Builder', 'Great Soundtrack', 'Moddable', 'Online Co-Op', 'Co-op', 'Building', 'Management', 'Hex Grid', 'Atmospheric'];
