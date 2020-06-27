@@ -14,7 +14,8 @@ app.get('/api/tags/:gameId', (req, res) => {
 
   db.query(sqlText, (err, result) => {
     if (err) { res.status(500).send({ error: 'Internal server error' }); throw err; }
-    res.send(result.map((row) => row.name));
-    // ex. { ['Strategy', 'Turn-Based Strategy', 'Historical', 'Multiplayer', ... ] }
+    console.log(`{"tags": [${result.map((row) => `"${row.name}"`)}]}`);
+    res.json(JSON.parse(`{"tags": [${result.map((row) => `"${row.name}"`)}]}`));
+    // ex. {"tags":["Difficult","Atmospheric","Anime","Music","Design & Illustration","Classic"]}
   });
 });
