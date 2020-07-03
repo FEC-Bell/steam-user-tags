@@ -1,13 +1,4 @@
-// import React from 'react';
-
-// const Tags = () => (
-//   <div>Tags go here</div>
-// );
-
-// export default Tags;
-
 /* eslint-disable react/prop-types */
-
 import React from 'react';
 
 export default class Tags extends React.Component {
