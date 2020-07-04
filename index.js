@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const express = require('express');
+const path = require('path');
 const db = require('./db/connection.js');
 
 const app = express();
@@ -7,6 +8,10 @@ const port = 3002;
 
 app.listen(port, () => console.log(`Steam user tags service. listening at http://localhost:${port}`));
 app.use(express.static('./client/dist'));
+
+app.get('/game/:gameId', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
 
 app.get('/api/tags/:gameId', (req, res) => {
 // get all user tags for this game sorted by popularity ( most tagged first )
