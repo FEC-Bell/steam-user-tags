@@ -4,7 +4,7 @@ const path = require('path');
 const db = require('./db/connection.js');
 
 const app = express();
-const port = 3002;
+const port = 3006;
 
 app.listen(port, () => console.log(`Steam user tags service. listening at http://localhost:${port}`));
 app.use(express.static('./client/dist'));
