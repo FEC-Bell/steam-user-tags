@@ -2,7 +2,7 @@
 Display a summary view of user tags, as well as a modal popup for the full list
 
 
-From SSH:
+ssh -i "rpt21.pem" ubuntu@ec2-54-185-79-51.us-west-2.compute.amazonaws.co
 
 sudo apt update
 
