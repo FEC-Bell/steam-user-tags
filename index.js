@@ -1,15 +1,17 @@
 /* eslint-disable no-console */
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const db = require('./db/connection.js');
 
 const app = express();
 const port = 3006;
 
-app.listen(port, () => console.log(`Steam user tags service. listening at http://localhost:${port}`));
+app.use(cors());
+app.listen(port, () => console.log(`Steam user tags service. Not listening at http://localhost:${port}`));
 app.use(express.static('./client/dist'));
 
-app.get('/game/:gameId', (req, res) => {
+app.get('/app/:gameId', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 });
 

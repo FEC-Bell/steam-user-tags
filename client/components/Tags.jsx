@@ -11,7 +11,7 @@ export default class Tags extends React.Component {
 
   componentDidMount() {
     const { game } = this.props;
-    fetch(`/api/tags/${game}`)
+    fetch(`http://localhost:3006/api/tags/${game}`)
       .then((response) => response.json())
       .then((json) => {
         if (json) this.setState({ data: json });
@@ -31,20 +31,7 @@ export default class Tags extends React.Component {
         <h3>Popular user-defined tags for this product:</h3>
         { tagsShort }
         <div>+</div>
-        <div>
-          <p />
-          <div>Modal dialog:</div>
-          <h1>VIEW AND EDIT TAGS FOR THIS PRODUCT</h1>
-          <h3>
-            Popular user-defined tags for this product:
-            <span title="These are tags applied to the product by the most users.  You can click a tag to find other products with that tag applied.  Or, you can hit the plus symbol for any existing tags to increase that tag's popularity on this product.">?</span>
-          </h3>
-          { tagsAll }
-          <h3>Sign in</h3>
-          Sign in to add your own tags to this product.
-          <button type="submit">Sign In</button>
-          <button type="submit">Close</button>
-        </div>
+
       </div>
     );
   }
