@@ -11,3 +11,9 @@ sudo apt upgrade
 sudo apt install mysql-server
 
 sudo mysql_secure_installation
+
+sudo mysql
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password 
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YourRootPassword';
+FLUSH PRIVILEGES;
