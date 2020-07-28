@@ -7,6 +7,7 @@
     "start": "nodemon server",
     "seed": "node db/seed.js",
     "build": "webpack -d --watch --mode production",
+    "build-server": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev:react": "webpack -d --watch"
   },
