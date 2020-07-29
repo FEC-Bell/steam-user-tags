@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import Tags from './Tags';
 
 const slashes = window.location.pathname.split('/');
-const gameid = slashes[slashes.length - 1].split('?')[0].split('#')[0] || 1;
+const gameId = (slashes[slashes.length - 1].split('?')[0].split('#')[0]) || 1;
 
-ReactDOM.render(<Tags game={gameid} />, document.getElementById('user-tags'));
+let serverRoot = 'http://44.233.13.178:3002';
+// serverRoot = 'http://localhost:3002'; // comment out for prod
+
+ReactDOM.render(<Tags game={gameId} server={serverRoot}/>, document.getElementById('user-tags'));

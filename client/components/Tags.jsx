@@ -10,8 +10,8 @@ export default class Tags extends React.Component {
   }
 
   componentDidMount() {
-    const { game } = this.props;
-    fetch(`http://localhost:3006/api/tags/${game}`)
+    const { game, server } = this.props;
+    fetch(`${server}/api/tags/${game}`)
       .then((response) => response.json())
       .then((json) => {
         if (json) this.setState({ data: json });
