@@ -1,3 +1,37 @@
 #user-tags div {
   font-family:"Motiva Sans", sans-serif;
 }
+
+#tags-popular {
+  white-space: nowrap;
+  height: 22px;
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #c6d4df;
+  font-size: 11px;
+  border: 1px dashed red;
+}
+
+#tags-popular a {
+    text-decoration: none;
+    display: inline-block;
+    line-height: 19px;
+    padding: 0 3px;
+    color: rgb(103, 193, 245);;
+    background-color: rgba( 103, 193, 245, 0.2 );
+    box-shadow: none;
+    margin-right: 0px;
+    cursor: pointer;
+    margin-bottom: 3px;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-radius: 5px;
+    z-index: 12;
+    border: 1px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    transition: background-color .32s ease-in-out;
+    min-width: 32px;
+}
