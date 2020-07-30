@@ -10,8 +10,8 @@ export default class Tags extends React.Component {
   }
 
   componentDidMount() {
-    const { game, server } = this.props;
-    fetch(`${server}/api/tags/${game}`)
+    const { game } = this.props;
+    fetch(`/api/tags/${game}`)
       .then((response) => response.json())
       .then((json) => {
         if (json) this.setState({ data: json });
@@ -21,16 +21,19 @@ export default class Tags extends React.Component {
   render() {
     const { data } = this.state;
     const tagsAll = data.tags.map((tag) => (
-      <div>
-        {tag}
-      </div>
+      <a href={`https://store.steampowered.com/tags/en/${tag}`}>{tag}</a>
     ));
     const tagsShort = tagsAll.slice(0, 4);
     return (
       <div>
         <h3>Popular user-defined tags for this product:</h3>
-        { tagsShort }
+        <div id="tags-popular">
+          { tagsShort }
+        </div>
         <div>+</div>
+        <div>
+          { tagsAll }
+        </div>
 
       </div>
     );
