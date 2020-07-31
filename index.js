@@ -15,6 +15,10 @@ app.get('/app/:gameId', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 });
 
+app.get('/tags.css', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'tags.css'));
+});
+
 app.get('/api/tags/:gameId', (req, res) => {
 // get all user tags for this game sorted by popularity ( most tagged first )
   const sqlText = `SELECT name FROM user_tags WHERE gameid = ${req.params.gameId} ORDER BY count DESC`;
