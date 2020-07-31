@@ -8,7 +8,7 @@ const app = express();
 const port = 3006;
 
 app.use(cors());
-app.listen(port, () => console.log(`Steam user tags service. Not listening at http://localhost:${port}`));
+app.listen(port, () => console.log(`Steam user tags service. Now listening at http://localhost:${port}`));
 app.use(express.static('./client/dist'));
 
 app.get('/app/:gameId', (req, res) => {
@@ -25,6 +25,7 @@ app.get('/api/tags/:gameId', (req, res) => {
 
   db.query(sqlText, (err, result) => {
     if (err) { res.status(500).send({ error: 'Internal server error' }); throw err; }
+    console.log(JSON.parse(`{"tags": [${result.map((row) => `"${row.name}"`)}]}`));
     res.json(JSON.parse(`{"tags": [${result.map((row) => `"${row.name}"`)}]}`));
     // ex. {"tags":["Difficult","Atmospheric","Anime","Music","Design & Illustration","Classic"]}
   });
