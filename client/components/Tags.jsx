@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import './tags.scss';
 
 export default class Tags extends React.Component {
   constructor(props) {
@@ -21,20 +22,31 @@ export default class Tags extends React.Component {
   render() {
     const { data } = this.state;
     const tagsAll = data.tags.map((tag) => (
-      <a href={`https://store.steampowered.com/tags/en/${tag}`}>{tag}</a>
+      <div class="tag-wrap">
+        <a href={`https://store.steampowered.com/tags/en/${tag}`}>{tag}</a>
+      </div>
     ));
     const tagsShort = tagsAll.slice(0, 4);
     return (
       <div>
-        <h3>Popular user-defined tags for this product:</h3>
+        <p>Popular user-defined tags for this product:</p>
         <div id="tags-popular">
           { tagsShort }
+          <a id="tags-more" href="javascript: return;">+</a>
         </div>
-        <div>+</div>
-        <div>
-          { tagsAll }
+        <div className="modal">
+          <div className="modal-content">
+            <div className="newmodal_header_border">
+              <div className="newmodal_header">
+                <div className="newmodal_close" />
+                <div className="title_text">
+                  View and edit tags for this product
+                </div>
+              </div>
+            </div>
+            { tagsAll }
+          </div>
         </div>
-
       </div>
     );
   }
